@@ -24,16 +24,16 @@ const (
 // 1 === ￥0.014 / 1k tokens
 
 var defaultModelRatio = map[string]float64{
-	//"midjourney":                50,
+	// "midjourney":                50,
 	"gpt-4-gizmo-*":  15,
 	"gpt-4o-gizmo-*": 2.5,
 	"gpt-4-all":      15,
 	"gpt-4o-all":     15,
 	"gpt-4":          15,
-	//"gpt-4-0314":                   15, //deprecated
+	// "gpt-4-0314":                   15, //deprecated
 	"gpt-4-0613": 15,
 	"gpt-4-32k":  30,
-	//"gpt-4-32k-0314":               30, //deprecated
+	// "gpt-4-32k-0314":               30, //deprecated
 	"gpt-4-32k-0613":                          30,
 	"gpt-4-1106-preview":                      5,    // $10 / 1M tokens
 	"gpt-4-0125-preview":                      5,    // $10 / 1M tokens
@@ -98,7 +98,7 @@ var defaultModelRatio = map[string]float64{
 	"gpt-5-mini-2025-08-07":            0.125,
 	"gpt-5-nano":                       0.025,
 	"gpt-5-nano-2025-08-07":            0.025,
-	//"gpt-3.5-turbo-0301":           0.75, //deprecated
+	// "gpt-3.5-turbo-0301":           0.75, //deprecated
 	"gpt-3.5-turbo":          0.25,
 	"gpt-3.5-turbo-0613":     0.75,
 	"gpt-3.5-turbo-16k":      1.5, // $0.003 / 1K tokens
@@ -111,8 +111,8 @@ var defaultModelRatio = map[string]float64{
 	"text-ada-001":           0.2,
 	"text-babbage-001":       0.25,
 	"text-curie-001":         1,
-	//"text-davinci-002":               10,
-	//"text-davinci-003":               10,
+	// "text-davinci-002":               10,
+	// "text-davinci-003":               10,
 	"text-davinci-edit-001":                     10,
 	"code-davinci-edit-001":                     10,
 	"whisper-1":                                 15,  // $0.006 / minute -> $0.006 / 150 words -> $0.006 / 200 tokens -> $0.03 / 1k tokens
@@ -403,7 +403,7 @@ func GetModelRatio(name string) (float64, bool, string) {
 			if wildcardRatio, ok := modelRatioMap.Get(CompactWildcardModelKey); ok {
 				return wildcardRatio, true, name
 			}
-			//return 0, true, name
+			// return 0, true, name
 		}
 		return 37.5, operation_setting.SelfUseModeEnabled, name
 	}
@@ -470,6 +470,7 @@ func GetCompletionRatioInfo(name string) CompletionRatioInfo {
 	}
 
 	hardCodedRatio, locked := getHardcodedCompletionModelRatio(name)
+	locked = false
 	if locked {
 		return CompletionRatioInfo{
 			Ratio:  hardCodedRatio,
