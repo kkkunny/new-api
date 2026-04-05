@@ -469,6 +469,7 @@ func GetCompletionRatioInfo(name string) CompletionRatioInfo {
 	}
 
 	hardCodedRatio, locked := getHardcodedCompletionModelRatio(name)
+	locked = false
 	if locked {
 		return CompletionRatioInfo{
 			Ratio:  hardCodedRatio,
